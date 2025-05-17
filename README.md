@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Next.js와 Spring Boot를 활용한 커뮤니티 웹 사이트
 
-## Getting Started
+### **📍 프로젝트 설명**
 
-First, run the development server:
+기존 Vue.js와 Nuxt.js로 개발한 커톡커톡을 <br />
+Next.js로 리팩토링한 프로젝트입니다. <br />
+한다글다글 입사 전, 회사에서 사용하는 기술 스택을 익히기 위해 진행 중입니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **📍 사용 기술**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| 분류          | 기술 스택    |
+| ------------- | ------------ |
+| 상태 관리     | Zustand      |
+| 스타일링 도구 | Tailwind CSS |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### **📍 설치 패키지**
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| 패키지명    | 설치 명령어                         |
+| ----------- | ----------------------------------- |
+| react-query | `npm install @tanstack/react-query` |
+| axios       | `npm install axios`                 |
+| react-icons | `npm install react-icons`           |
+| classnames  | `npm install classnames`            |
+| Zustand     | `npm install zustand`               |
