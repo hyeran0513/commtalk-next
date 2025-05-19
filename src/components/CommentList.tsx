@@ -15,7 +15,11 @@ const CommentList = ({ postId }: CommentListProps) => {
   return (
     <div>
       {comments?.map((comment: Comment) => (
-        <CommentItem key={comment.commentId} comment={comment} />
+        <CommentItem
+          key={comment.commentId}
+          comment={comment}
+          postId={postId}
+        />
       ))}
     </div>
   );

@@ -1,13 +1,25 @@
+import { useDeleteComment, useLikeComment } from "@/hooks/useComment";
 import { Comment } from "@/types/comment";
-import { BiSolidLike } from "react-icons/bi";
+import { BiSolidLike, BiLike } from "react-icons/bi";
 
 interface CommentItemProps {
   comment: Comment;
+  postId: string;
 }
 
-const CommentItem = ({ comment }: CommentItemProps) => {
-  const { content, writer, updatedAt, likeCount, anonymousYN, children } =
-    comment;
+const CommentItem = ({ comment, postId }: CommentItemProps) => {
+  const {
+    commentId,
+    content,
+    writer,
+    updatedAt,
+    likeCount,
+    anonymousYN,
+    children,
+    likeYN,
+  } = comment;
+  const { mutate: deleteComment } = useDeleteComment(postId, commentId);
+  const { mutate: likeComment } = useLikeComment(postId, commentId);
 
   return (
     <div className="p-4 border-t border-gray-200">
@@ -15,15 +27,32 @@ const CommentItem = ({ comment }: CommentItemProps) => {
         <span className="font-semibold text-sm">
           {anonymousYN ? "익명" : writer.nickname}
         </span>
-        <span className="text-xs text-gray-500">{updatedAt}</span>
+
+        <div className="flex gap-[14px]">
+          <button className="text-[14px] cursor-pointer">수정</button>
+          <button
+            className="text-[14px] cursor-pointer"
+            onClick={() => deleteComment()}
+          >
+            삭제
+          </button>
+        </div>
       </div>
 
       <p className="text-gray-800 break-words leading-relaxed mb-2">
         {content}
       </p>
 
-      <div className="flex itemsc-center gap-[10px] text-xs text-gray-500">
-        <BiSolidLike /> 좋아요 {likeCount}개
+      <div className="flex justify-between items-center">
+        <button
+          onClick={() => likeComment()}
+          className="flex itemsc-center gap-[4px] text-xs text-gray-500 cursor-pointer"
+        >
+          {likeYN ? <BiSolidLike className="text-indigo-500" /> : <BiLike />}
+          좋아요 {likeCount}개
+        </button>
+
+        <span className="text-xs text-gray-500">{updatedAt}</span>
       </div>
 
       {/* 답글 */}

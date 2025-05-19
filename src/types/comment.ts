@@ -15,7 +15,7 @@ export interface ChildComment {
 }
 
 export interface Comment {
-  commentId: number;
+  commentId: string;
   content: string;
   writer: CommentWriter;
   anonymousYN: boolean;
