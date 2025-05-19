@@ -5,6 +5,8 @@ import {
   editPost,
   getPostDetail,
   getPostList,
+  likePost,
+  scrapPost,
 } from "@/services/postService";
 import { useRouter } from "next/navigation";
 
@@ -61,7 +63,7 @@ export const useCreatePost = (boardId: string) => {
 // 게시글 상세 조회
 export const usePostDetail = (boardId: string, postId: string) => {
   return useQuery({
-    queryKey: ["post", boardId, postId],
+    queryKey: ["postDetail", boardId, postId],
     queryFn: () => getPostDetail(boardId, postId),
     enabled: !!boardId && !!postId,
   });
@@ -86,5 +88,41 @@ export const useEditPost = (boardId: string, postId: string) => {
   return useMutation({
     mutationKey: ["editPost", boardId, postId],
     mutationFn: () => editPost(boardId, postId),
+  });
+};
+
+// 게시글 좋아요 및 취소
+export const useLikePost = (boardId: string, postId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["likePost", boardId, postId],
+    mutationFn: () => likePost(boardId, postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["postDetail", boardId, postId],
+      });
+    },
+    onError: (error) => {
+      alert("좋아요 실패" + error.message);
+    },
+  });
+};
+
+// 게시글 스크랩 및 취소
+export const useScrapPost = (boardId: string, postId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["scrapPost", boardId, postId],
+    mutationFn: () => scrapPost(boardId, postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["postDetail", boardId, postId],
+      });
+    },
+    onError: (error) => {
+      alert("스크랩 실패" + error.message);
+    },
   });
 };

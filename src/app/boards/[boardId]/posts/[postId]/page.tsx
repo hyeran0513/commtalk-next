@@ -5,7 +5,13 @@ import { BiSolidLike, BiSolidBookmark } from "react-icons/bi";
 import classNames from "classnames";
 import CommentList from "@/components/CommentList";
 import CommentForm from "@/components/CommentForm";
-import { useDeletePost, useEditPost, usePostDetail } from "@/hooks/usePost";
+import {
+  useDeletePost,
+  useEditPost,
+  useLikePost,
+  usePostDetail,
+  useScrapPost,
+} from "@/hooks/usePost";
 
 export default function PostPage({
   params,
@@ -17,6 +23,8 @@ export default function PostPage({
   const { data: post, isLoading, error } = usePostDetail(boardId, postId);
   const { mutate: deletePost } = useDeletePost(boardId, postId);
   const { mutate: editPost } = useEditPost(boardId, postId);
+  const { mutate: likePost } = useLikePost(boardId, postId);
+  const { mutate: scrapPost } = useScrapPost(boardId, postId);
 
   if (isLoading) return <div>로딩 중..</div>;
   if (error) return <div>에러 {error.message}</div>;
@@ -44,17 +52,33 @@ export default function PostPage({
         </div>
 
         <p className="break-words">{post.content}</p>
+
+        <div className="flex flex-wrap gap-[10px] mt-[20px]">
+          {post.hashtags.map(
+            (hashtag: { hashtagId: number; hashtag: string }) => (
+              <div
+                className="py-[4px] px-[10px] bg-gray-100 text-gray-500 text-sm rounded-md"
+                key={hashtag.hashtagId}
+              >
+                {hashtag.hashtag}
+              </div>
+            )
+          )}
+        </div>
       </div>
 
       <div className="flex items-center justify-between mb-[30px]">
         <div className="flex gap-[10px]">
-          <button className="flex items-center gap-[10px] px-[14px] py-[8px] border border-gray-200 rounded-[50px]">
+          <button
+            onClick={() => likePost()}
+            className="flex items-center gap-[10px] px-[14px] py-[8px] border border-gray-200 rounded-[50px] cursor-pointer"
+          >
             <div
               className={classNames(
                 "flex items-center justify-center w-[30px] h-[30px] rounded-[50%]",
                 {
-                  "bg-indigo-500": post.scrapYN,
-                  "bg-gray-200": !post.scrapYN,
+                  "bg-indigo-500": post.likeYN,
+                  "bg-gray-200": !post.likeYN,
                 }
               )}
             >
@@ -63,7 +87,10 @@ export default function PostPage({
             <span>{post.likeCnt}</span>
           </button>
 
-          <button className="flex items-center gap-[10px] px-[14px] py-[8px] border border-gray-200 rounded-[50px]">
+          <button
+            onClick={() => scrapPost()}
+            className="flex items-center gap-[10px] px-[14px] py-[8px] border border-gray-200 rounded-[50px] cursor-pointer"
+          >
             <div
               className={classNames(
                 "flex items-center justify-center w-[30px] h-[30px] rounded-[50%]",

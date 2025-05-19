@@ -60,3 +60,17 @@ export const editPost = async (boardId: string, postId: string) => {
 
   return res.data;
 };
+
+// 게시글 좋아요 및 취소
+export const likePost = async (boardId: string, postId: string) => {
+  const res = await axios.post(`boards/${boardId}/posts/${postId}/like`);
+
+  return res.data;
+};
+
+// 게시글 스크랩 및 취소
+export const scrapPost = async (boardId: string, postId: string) => {
+  const res = await axios.post(`boards/${boardId}/posts/${postId}/scrap`);
+
+  return res.data;
+};
