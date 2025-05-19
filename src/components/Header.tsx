@@ -3,10 +3,16 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Category from "./Category";
-import { BiMenu } from "react-icons/bi";
+import { BiMenu, BiUser } from "react-icons/bi";
+import { usePathname, useRouter } from "next/navigation";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const isMypage = pathname.startsWith("/mypage");
+
+  if (isMypage) return null;
 
   return (
     <div className="fixed z-[100] w-full bg-white">
@@ -16,6 +22,10 @@ const Header = () => {
           <Link href="/" className="text-black-200 text-3xl font-bold">
             커톡커톡
           </Link>
+
+          <button className="ml-auto" onClick={() => router.push("/mypage")}>
+            <BiUser className="text-[24px] cursor-pointer" />
+          </button>
         </div>
       </div>
 
