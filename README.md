@@ -19,11 +19,12 @@ Next.js로 리팩토링한 프로젝트입니다. <br />
 
 ### **📍 설치 패키지**
 
-| 패키지명        | 설치 명령어                         |
-| --------------- | ----------------------------------- |
-| react-query     | `npm install @tanstack/react-query` |
-| axios           | `npm install axios`                 |
-| react-icons     | `npm install react-icons`           |
-| classnames      | `npm install classnames`            |
-| Zustand         | `npm install zustand`               |
-| react-hook-form | `npm install react-hook-form`       |
+| 패키지명         | 설치 명령어                               |
+| ---------------- | ----------------------------------------- |
+| react-query      | `npm install @tanstack/react-query`       |
+| axios            | `npm install axios`                       |
+| react-icons      | `npm install react-icons`                 |
+| classnames       | `npm install classnames`                  |
+| Zustand          | `npm install zustand`                     |
+| react-hook-form  | `npm install react-hook-form`             |
+| react-sortablejs | `npm install sortablejs react-sortablejs` |

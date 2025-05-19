@@ -13,3 +13,10 @@ export const getBoard = async (boardId: string) => {
 
   return res.data;
 };
+
+// 핀고정 게시판 조회
+export const getPinnedBoard = async () => {
+  const res = await axios.get("/boards/pinned");
+
+  return res.data;
+};

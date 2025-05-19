@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   editPost,
+  getPopularPost,
   getPostDetail,
   getPostList,
   likePost,
@@ -124,5 +125,13 @@ export const useScrapPost = (boardId: string, postId: string) => {
     onError: (error) => {
       alert("스크랩 실패" + error.message);
     },
+  });
+};
+
+// 인기 게시글 목록 조회
+export const usePopularPost = () => {
+  return useQuery({
+    queryKey: ["popularPost"],
+    queryFn: () => getPopularPost(),
   });
 };

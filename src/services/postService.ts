@@ -74,3 +74,10 @@ export const scrapPost = async (boardId: string, postId: string) => {
 
   return res.data;
 };
+
+// 인기 게시글 목록 조회
+export const getPopularPost = async () => {
+  const res = await axios.get("/posts/popular");
+
+  return res.data;
+};
