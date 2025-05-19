@@ -1,9 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import { getBoard } from "@/services/boardService";
+import { getAllBoard, getBoard } from "@/services/boardService";
 
-export const useBoard = () => {
+// 전체 게시판 조회
+export const useAllBoard = () => {
+  return useQuery({
+    queryKey: ["allBoards"],
+    queryFn: () => getAllBoard(),
+  });
+};
+
+// 게시판 조회
+export const useBoard = (boardId: string) => {
   return useQuery({
     queryKey: ["boards"],
-    queryFn: () => getBoard(),
+    queryFn: () => getBoard(boardId),
+    enabled: !!boardId,
   });
 };

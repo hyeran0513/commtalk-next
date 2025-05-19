@@ -5,7 +5,7 @@ import { BiSolidLike, BiSolidBookmark } from "react-icons/bi";
 import classNames from "classnames";
 import CommentList from "@/components/CommentList";
 import CommentForm from "@/components/CommentForm";
-import { usePost } from "@/hooks/usePost";
+import { useDeletePost, useEditPost, usePostDetail } from "@/hooks/usePost";
 
 export default function PostPage({
   params,
@@ -14,20 +14,32 @@ export default function PostPage({
 }) {
   const { boardId, postId } = use(params);
 
-  const { data: post, isLoading, error } = usePost(boardId, postId);
+  const { data: post, isLoading, error } = usePostDetail(boardId, postId);
+  const { mutate: deletePost } = useDeletePost(boardId, postId);
+  const { mutate: editPost } = useEditPost(boardId, postId);
 
   if (isLoading) return <div>로딩 중..</div>;
   if (error) return <div>에러 {error.message}</div>;
 
   return (
-    <div className="m-auto max-w-[1240px] py-[40px]">
+    <div className="m-auto max-w-[1240px] pt-[166px] pb-[40px]">
       <div className="border border-gray-200 rounded-md p-[20px] mb-[30px]">
         <div className="flex justify-between mb-[20px]">
           <h3 className="text-[20px] font-semibold">{post.title}</h3>
 
           <div className="flex gap-[14px]">
-            <button className="text-[14px] cursor-pointer">수정</button>
-            <button className="text-[14px] cursor-pointer">삭제</button>
+            <button
+              className="text-[14px] cursor-pointer"
+              onClick={() => editPost()}
+            >
+              수정
+            </button>
+            <button
+              className="text-[14px] cursor-pointer"
+              onClick={() => deletePost()}
+            >
+              삭제
+            </button>
           </div>
         </div>
 

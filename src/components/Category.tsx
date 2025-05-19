@@ -1,6 +1,6 @@
 "use client";
 
-import { useBoard } from "@/hooks/useBoard";
+import { useAllBoard } from "@/hooks/useBoard";
 import { Board } from "@/types/board";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -10,7 +10,7 @@ interface CategoryProps {
 }
 
 const Category = ({ onClose }: CategoryProps) => {
-  const { data: boards, isLoading, error } = useBoard();
+  const { data: boards, isLoading, error } = useAllBoard();
   const router = useRouter();
 
   const handleNavigate = (path: string) => {

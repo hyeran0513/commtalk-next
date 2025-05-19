@@ -22,3 +22,29 @@ export interface Post {
   likeYN: boolean;
   scrapYN: boolean;
 }
+
+export interface Board {
+  boardId: number;
+  boardName: string;
+}
+
+export interface PostList {
+  postId: number;
+  title: string;
+  previewContent: string;
+  board: Board;
+  authorName: string;
+  updatedAt: string;
+  commentableYN: boolean;
+  commentCnt: number;
+  viewCnt: number;
+  likeCnt: number;
+}
+
+export interface PostListResponse {
+  totalPages: number;
+  pageNumber: number;
+  previous: number;
+  next: number;
+  posts: Post[];
+}
