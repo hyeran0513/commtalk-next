@@ -11,8 +11,9 @@ const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   const isMypage = pathname.startsWith("/mypage");
+  const isMembers = pathname.startsWith("/members");
 
-  if (isMypage) return null;
+  if (isMypage || isMembers) return null;
 
   return (
     <div className="fixed z-[100] w-full bg-white">
@@ -23,9 +24,25 @@ const Header = () => {
             커톡커톡
           </Link>
 
-          <button className="ml-auto" onClick={() => router.push("/mypage")}>
-            <BiUser className="text-[24px] cursor-pointer" />
-          </button>
+          <div className="flex items-center gap-[40px] ml-auto">
+            <button
+              className="cursor-pointer"
+              onClick={() => router.push("/members")}
+            >
+              회원가입
+            </button>
+
+            <button
+              className="cursor-pointer"
+              onClick={() => router.push("/members/login")}
+            >
+              로그인
+            </button>
+
+            <button onClick={() => router.push("/mypage")}>
+              <BiUser className="text-[24px] cursor-pointer" />
+            </button>
+          </div>
         </div>
       </div>
 
