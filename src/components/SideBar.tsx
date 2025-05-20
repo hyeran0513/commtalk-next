@@ -25,7 +25,6 @@ const SideBar = () => {
   });
 
   const onSubmit = (data: CurrentPassword) => {
-    console.log("???????????");
     confirmPasswordMutate(data);
   };
 

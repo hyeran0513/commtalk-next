@@ -1,4 +1,4 @@
-import { usePinnedBoard } from "@/hooks/useBoard";
+import { useGetPinnedBoard, useReorderPinnedBoard } from "@/hooks/useBoard";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
@@ -20,14 +20,21 @@ type BoardItem = {
 };
 
 export default function PinBoards() {
-  const { data } = usePinnedBoard();
+  const { data } = useGetPinnedBoard();
   const [items, setItems] = useState<BoardItem[]>([]);
+  const { mutate: reorderMutate } = useReorderPinnedBoard();
 
   useEffect(() => {
     if (data) {
       setItems(data);
     }
   }, [data]);
+
+  const onSortEnd = (event) => {
+    const pinnedBoardIds = items.map((item) => item.pinnedBoardId);
+
+    reorderMutate({ pinnedBoardIds });
+  };
 
   return (
     <ReactSortable
@@ -36,6 +43,7 @@ export default function PinBoards() {
       setList={setItems}
       className="grid grid-cols-2 gap-[20px]"
       dataIdAttr="data-id"
+      onEnd={onSortEnd}
     >
       {items.map((item) => (
         <li

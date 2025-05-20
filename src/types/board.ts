@@ -3,3 +3,9 @@ export interface Board {
   boardName: string;
   desc: string;
 }
+
+export interface BoardWithPin {
+  boardId: number;
+  boardName: string;
+  pinnedBoardId: number;
+}
