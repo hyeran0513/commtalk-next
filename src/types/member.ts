@@ -6,3 +6,7 @@ export interface Member {
   email: string;
   phone: string;
 }
+
+export interface CurrentPassword {
+  currentPassword: string;
+}

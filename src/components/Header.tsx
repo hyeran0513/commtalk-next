@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Category from "./Category";
 import { BiMenu, BiUser } from "react-icons/bi";
 import { usePathname, useRouter } from "next/navigation";
+import Profile from "./Profile";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -42,6 +43,8 @@ const Header = () => {
             <button onClick={() => router.push("/mypage")}>
               <BiUser className="text-[24px] cursor-pointer" />
             </button>
+
+            <Profile />
           </div>
         </div>
       </div>
